@@ -1,20 +1,19 @@
 const express = require("express");
 const cors = require("cors");
+const database = require("./db-connect/db");
 let port = 21000;
 const app = express();
+database.connect();
+app.use(cors());
+app.use(express.json());
 
-app.use(
-  cors({
-    origin: "*",
-    credientials: true,
-  })
-);
 app.get("/", (req, res) => {
-  return {
+  res.status(200).json({
     success: true,
     message: "Port is running",
-  };
+  });
 });
-app.listen(port, async () => {
+
+app.listen(port, () => {
   console.log(`App is running on the port ${port}`);
 });
