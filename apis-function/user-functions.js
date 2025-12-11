@@ -126,13 +126,13 @@ exports.getAllUserDetails = async (req, res) => {
   try {
     console.log("HEllo world");
 
-    const { email } = req.query;
+    const { email } = req.params;
     console.log("The request query:", req.query);
 
     console.log("The email query:", email);
 
     const getDetails = await User.find({ email });
-    if (getDetails) {
+    if (!getDetails) {
       return res.status(404).json({
         success: false,
         message: "User not existing",
