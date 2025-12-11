@@ -33,21 +33,7 @@ exports.createManyUsers = async (req, res) => {
     });
   }
 };
-exports.getAllUsers = async (req, res) => {
-  try {
-    const getDetails = await User.find();
-    // console.log("The users details:", getDetails);
-    return res.status(200).json({
-      success: true,
-      data: getDetails,
-    });
-  } catch (e) {
-    res.status(404).json({
-      success: false,
-      error: e,
-    });
-  }
-};
+
 exports.updateEmail = async (req, res) => {
   try {
     const { name, email } = req.body;
@@ -142,6 +128,21 @@ exports.getAllUserDetails = async (req, res) => {
     return res.status(200).json({
       success: true,
       data: getDetails,
+    });
+  } catch (e) {
+    res.status(404).json({
+      success: false,
+      error: e,
+    });
+  }
+};
+exports.getAllUsers = async (req, res) => {
+  try {
+    const getAllUsers = await User.find({}).select("-password");
+    console.log("HELLO API", getAllUsers);
+    return res.status(200).json({
+      success: true,
+      getUsers: getAllUsers,
     });
   } catch (e) {
     res.status(404).json({

@@ -16,4 +16,5 @@ router.put("/modifyMail", updateEmail);
 router.get("/get-details/:id", getDetails);
 router.post("/userRegister", userRegister);
 router.get("/getUserDetails/:email/:mobile", getAllUserDetails);
+router.get("/getAllUsers", getAllUsers);
 module.exports = router;
