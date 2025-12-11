@@ -91,7 +91,10 @@ exports.userRegister = async (req, res) => {
   try {
     const { email, firstName, secondName, mobileNumber, password } = req.body;
 
-    const findUser = await User.findOne({ email: email });
+    const findUser = await User.findOne({
+      email: email,
+      mobileNumber: mobileNumber,
+    });
     //console.log("The find user:", findUser);
 
     if (findUser) {
@@ -110,6 +113,34 @@ exports.userRegister = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "User is registed successfully",
+    });
+  } catch (e) {
+    res.status(404).json({
+      success: false,
+      error: e,
+    });
+  }
+};
+
+exports.getAllUserDetails = async (req, res) => {
+  try {
+    console.log("HEllo world");
+
+    const { email } = req.query;
+    console.log("The request query:", req.query);
+
+    console.log("The email query:", email);
+
+    const getDetails = await User.find({ email });
+    if (getDetails) {
+      return res.status(404).json({
+        success: false,
+        message: "User not existing",
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      data: getDetails,
     });
   } catch (e) {
     res.status(404).json({
