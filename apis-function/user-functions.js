@@ -126,12 +126,13 @@ exports.getAllUserDetails = async (req, res) => {
   try {
     console.log("HEllo world");
 
-    const { email } = req.params;
+    const { email, mobile } = req.params;
     console.log("The request query:", req.query);
 
     console.log("The email query:", email);
+    console.log("Mobile:", mobile);
 
-    const getDetails = await User.find({ email });
+    const getDetails = await User.find({ email, mobileNumber: mobile });
     if (!getDetails) {
       return res.status(404).json({
         success: false,
