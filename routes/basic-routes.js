@@ -7,6 +7,7 @@ const {
   getDetails,
   userRegister,
   getAllUserDetails,
+  deleteUsers,
 } = require("../apis-function/user-functions");
 const router = express.Router();
 router.post("/userSignup", createUser);
@@ -17,4 +18,5 @@ router.get("/get-details/:id", getDetails);
 router.post("/userRegister", userRegister);
 router.get("/getUserDetails/:email/:mobile", getAllUserDetails);
 router.get("/getAllUsers", getAllUsers);
+router.delete("/deleteUsers/:id", deleteUsers);
 module.exports = router;

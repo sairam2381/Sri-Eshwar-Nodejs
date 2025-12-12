@@ -151,3 +151,20 @@ exports.getAllUsers = async (req, res) => {
     });
   }
 };
+exports.deleteUsers = async (req, res) => {
+  try {
+    // console.log("HELLO WORLD");
+    const { id } = req.params;
+    // console.log("HELLO WORLD", id);
+    const deleteUsers = await User.findByIdAndDelete(id);
+    return res.status(200).json({
+      success: true,
+      message: "The user is deleted successfully",
+    });
+  } catch (e) {
+    res.status(404).json({
+      success: false,
+      error: e,
+    });
+  }
+};
